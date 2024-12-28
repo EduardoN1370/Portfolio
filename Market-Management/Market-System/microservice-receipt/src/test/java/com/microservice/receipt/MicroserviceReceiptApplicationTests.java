@@ -1,10 +1,10 @@
-package com.microservice.order;
+package com.microservice.receipt;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class MicroserviceOrderApplicationTests {
+class MicroserviceReceiptApplicationTests {
 
 	@Test
 	void contextLoads() {

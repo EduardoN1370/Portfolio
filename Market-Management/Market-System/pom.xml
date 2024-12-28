@@ -21,8 +21,8 @@
     <module>microservice-eureka</module>
     <module>microservice-config</module>
     <module>microservice-product</module>
-    <module>microservice-order</module>
     <module>microservice-inventory</module>
+    <module>microservice-receipt</module>
   </modules>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

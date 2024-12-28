@@ -5,13 +5,13 @@
 	<parent>
 		<groupId>com.mycompany.app</groupId>
 		<artifactId>Market-System</artifactId>
-		<version>1.0-SNAPSHOT</version>
+		<version>1.0-SNAPSHOT</version> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.microservice.order</groupId>
-	<artifactId>microservice-order</artifactId>
+	<groupId>com.microservice.receipt</groupId>
+	<artifactId>microservice-receipt</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>microservice-order</name>
-	<description>Spring Boot Microservice Order</description>
+	<name>microservice-receipt</name>
+	<description>Spring Boot Microservice Receipt</description>
 	<url/>
 	<licenses>
 		<license/>
@@ -41,6 +41,10 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-config</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
