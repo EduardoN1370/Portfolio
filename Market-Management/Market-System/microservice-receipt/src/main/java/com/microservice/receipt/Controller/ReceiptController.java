@@ -1,5 +1,6 @@
 package com.microservice.receipt.Controller;
 
+import com.microservice.receipt.Dto.ReceiptDto;
 import com.microservice.receipt.Entity.Receipt;
 import com.microservice.receipt.Service.ServiceInterfaceReceipt;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,15 +16,17 @@ public class ReceiptController {
     private ServiceInterfaceReceipt serviceInterfaceReceipt;
 
     @PostMapping("/purchase")
-    public ResponseEntity purchaseProducts(@RequestBody Receipt receipt) {
-        serviceInterfaceReceipt.createReceipt(receipt);
+    public ResponseEntity purchaseProducts(@RequestBody ReceiptDto receiptDto) {
+        System.out.println("Hola mundo");
+        System.out.println(receiptDto);
+        serviceInterfaceReceipt.createReceipt(receiptDto);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity getReceipt(@PathVariable("id") Long id) {
+    public ResponseEntity<Receipt> getReceipt(@PathVariable("id") Long id) {
         serviceInterfaceReceipt.getReceipt(id);
-        return ResponseEntity.status(HttpStatus.OK).build();
+        return ResponseEntity.status(HttpStatus.OK).body(serviceInterfaceReceipt.getReceipt(id));
 
     }
 

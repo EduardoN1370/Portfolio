@@ -2,8 +2,11 @@ package com.microservice.receipt.Entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -12,12 +15,15 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Receipt {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long receiptId;
-    private int quantity;
-    private Date date;
+    private int numberItems;
+    private double totalPrice;
+
+    private LocalDateTime date ;
 
     @OneToMany(mappedBy = "receipt", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProductsReceipt> listproducts;
