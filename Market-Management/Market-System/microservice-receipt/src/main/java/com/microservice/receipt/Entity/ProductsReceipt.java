@@ -1,5 +1,6 @@
 package com.microservice.receipt.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,7 +19,8 @@ public class ProductsReceipt {
     private String productName;
     private int quantity;
     private double unitPrice;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "receipt_id")  // Esta columna será la clave foránea
+    @JsonIgnore
     private Receipt receipt;
 }

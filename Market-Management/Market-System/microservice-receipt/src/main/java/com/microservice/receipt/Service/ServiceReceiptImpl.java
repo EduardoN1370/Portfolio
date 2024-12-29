@@ -1,12 +1,14 @@
 package com.microservice.receipt.Service;
 
 import com.microservice.receipt.Dto.ReceiptDto;
+import com.microservice.receipt.Entity.ProductsReceipt;
 import com.microservice.receipt.Entity.Receipt;
 import com.microservice.receipt.Repository.RepoReceipt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class ServiceReceiptImpl implements ServiceInterfaceReceipt{
@@ -17,22 +19,31 @@ public class ServiceReceiptImpl implements ServiceInterfaceReceipt{
     private ServiceProductsReceipt serviceProductsReceipt;
 
     @Override
-    public void createReceipt(ReceiptDto receipt) {
+    public void createReceipt(ReceiptDto receiptDto) {
 
-    double totalPrice=serviceProductsReceipt.calculateTotalPrice(receipt.getListProducts());
-    int numberProoducts=serviceProductsReceipt.calculateNumberProducts(receipt.getListProducts());
+    Receipt newReceipt = new Receipt(null,0,0,LocalDateTime.now(),null);
+    List<ProductsReceipt> receiptDtoList = receiptDto.getListProducts();
+    for(ProductsReceipt productsReceipt : receiptDtoList){
+        productsReceipt.setReceipt(newReceipt);
+    }
+    double totalPrice=serviceProductsReceipt.calculateTotalPrice(receiptDtoList);
+    int numberProoducts=serviceProductsReceipt.calculateNumberProducts(receiptDtoList);
+    newReceipt.setTotalPrice(totalPrice);
+    newReceipt.setNumberItems(numberProoducts);
+    newReceipt.setListProducts(receiptDtoList);
     System.out.println("Hasta aca todo bien");
 
-    Receipt newReceipt = Receipt.builder()
-            .totalPrice(totalPrice)
-            .date(LocalDateTime.now())
-            .numberItems(numberProoducts)
-            .listproducts(receipt.getListProducts())
-            .build();
-    
 
     repoReceipt.save(newReceipt);
+
+
     }
+
+    @Override
+    public void testRecipe(Receipt receipt) {
+        repoReceipt.save(receipt);
+    }
+
 
     @Override
     public Receipt getReceipt(Long id) {

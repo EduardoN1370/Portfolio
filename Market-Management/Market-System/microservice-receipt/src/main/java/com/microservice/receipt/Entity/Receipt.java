@@ -19,14 +19,16 @@ import java.util.List;
 public class Receipt {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name = "receipt_id")
     private Long receiptId;
+
     private int numberItems;
     private double totalPrice;
 
-    private LocalDateTime date ;
+    private LocalDateTime date = LocalDateTime.now();
 
     @OneToMany(mappedBy = "receipt", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ProductsReceipt> listproducts;
+    private List<ProductsReceipt> listProducts;
 
 
 

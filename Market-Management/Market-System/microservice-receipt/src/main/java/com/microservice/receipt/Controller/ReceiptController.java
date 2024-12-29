@@ -16,17 +16,23 @@ public class ReceiptController {
     private ServiceInterfaceReceipt serviceInterfaceReceipt;
 
     @PostMapping("/purchase")
-    public ResponseEntity purchaseProducts(@RequestBody ReceiptDto receiptDto) {
+    public ResponseEntity purchaseProducts(@RequestBody ReceiptDto receipt) {
+
         System.out.println("Hola mundo");
-        System.out.println(receiptDto);
-        serviceInterfaceReceipt.createReceipt(receiptDto);
+        System.out.println(receipt);
+
+        serviceInterfaceReceipt.createReceipt(receipt);
         return ResponseEntity.status(HttpStatus.CREATED).build();
+
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Receipt> getReceipt(@PathVariable("id") Long id) {
-        serviceInterfaceReceipt.getReceipt(id);
-        return ResponseEntity.status(HttpStatus.OK).body(serviceInterfaceReceipt.getReceipt(id));
+        Receipt receipt= serviceInterfaceReceipt.getReceipt(id);
+/*
+        receipt.getListProducts().stream().forEach(re -> re.setReceipt(id));
+*/
+        return ResponseEntity.status(HttpStatus.OK).body(receipt);
 
     }
 
