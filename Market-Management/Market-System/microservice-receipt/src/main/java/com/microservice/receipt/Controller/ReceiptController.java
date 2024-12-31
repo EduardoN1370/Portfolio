@@ -17,12 +17,8 @@ public class ReceiptController {
 
     @PostMapping("/purchase")
     public ResponseEntity purchaseProducts(@RequestBody ReceiptDto receipt) {
-
-        System.out.println("Hola mundo");
-        System.out.println(receipt);
-
-        serviceInterfaceReceipt.createReceipt(receipt);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+      serviceInterfaceReceipt.createReceipt(receipt);
+      return ResponseEntity.status(HttpStatus.CREATED).build();
 
     }
 

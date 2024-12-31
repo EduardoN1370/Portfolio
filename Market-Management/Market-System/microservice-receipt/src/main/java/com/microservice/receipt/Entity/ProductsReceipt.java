@@ -15,7 +15,8 @@ import lombok.NoArgsConstructor;
 public class ProductsReceipt {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String id ; ;
+    @JsonIgnore
+    private String id ;
     private String productName;
     private int quantity;
     private double unitPrice;

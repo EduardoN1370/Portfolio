@@ -25,7 +25,7 @@ public class Receipt {
     private int numberItems;
     private double totalPrice;
 
-    private LocalDateTime date = LocalDateTime.now();
+    private LocalDateTime date ;
 
     @OneToMany(mappedBy = "receipt", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProductsReceipt> listProducts;

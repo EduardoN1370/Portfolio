@@ -1,6 +1,8 @@
 package com.microservice.receipt.Service;
 
+import com.microservice.receipt.Dto.ProductDto;
 import com.microservice.receipt.Dto.ReceiptDto;
+import com.microservice.receipt.Dto.RequestDto;
 import com.microservice.receipt.Entity.ProductsReceipt;
 import com.microservice.receipt.Entity.Receipt;
 import com.microservice.receipt.Repository.RepoReceipt;
@@ -20,29 +22,14 @@ public class ServiceReceiptImpl implements ServiceInterfaceReceipt{
 
     @Override
     public void createReceipt(ReceiptDto receiptDto) {
-
-    Receipt newReceipt = new Receipt(null,0,0,LocalDateTime.now(),null);
-    List<ProductsReceipt> receiptDtoList = receiptDto.getListProducts();
-    for(ProductsReceipt productsReceipt : receiptDtoList){
-        productsReceipt.setReceipt(newReceipt);
-    }
-    double totalPrice=serviceProductsReceipt.calculateTotalPrice(receiptDtoList);
-    int numberProoducts=serviceProductsReceipt.calculateNumberProducts(receiptDtoList);
-    newReceipt.setTotalPrice(totalPrice);
-    newReceipt.setNumberItems(numberProoducts);
-    newReceipt.setListProducts(receiptDtoList);
-    System.out.println("Hasta aca todo bien");
-
-
-    repoReceipt.save(newReceipt);
-
+    List<RequestDto> receiptDtoList = receiptDto.getListProducts();
+    List<ProductsReceipt> listProductReceipt = serviceProductsReceipt.getListProducts(receiptDtoList);
+    Receipt receipt = serviceProductsReceipt.buildReceipt(listProductReceipt);
+    repoReceipt.save(receipt);
 
     }
 
-    @Override
-    public void testRecipe(Receipt receipt) {
-        repoReceipt.save(receipt);
-    }
+
 
 
     @Override

@@ -5,10 +5,13 @@ import com.microservices.product.Repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductServiceImpl implements ProductServiceRepository {
+
     @Autowired
     private ProductRepository productRepository;
 
@@ -20,11 +23,16 @@ public class ProductServiceImpl implements ProductServiceRepository {
 
     @Override
     public Product getProductById(int id) {
-        return productRepository.getById(id);
+        return productRepository.findById(id).orElseThrow(null);
     }
 
     @Override
     public List<Product> getAllProducts() {
-        return productRepository.findAll();
+        return (List<Product>) productRepository.findAll();
+    }
+
+    @Override
+    public Product getProductByName(String name) {
+        return productRepository.findByNameProduct(name);
     }
 }

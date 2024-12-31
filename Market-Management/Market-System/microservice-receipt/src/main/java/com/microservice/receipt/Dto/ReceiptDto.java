@@ -6,5 +6,6 @@ import lombok.Data;
 import java.util.List;
 @Data
 public class ReceiptDto {
-    private List<ProductsReceipt> listProducts;
+    private List<RequestDto> listProducts;
+
 }
