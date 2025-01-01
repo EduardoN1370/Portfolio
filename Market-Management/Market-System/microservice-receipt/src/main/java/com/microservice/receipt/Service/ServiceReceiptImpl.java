@@ -25,7 +25,7 @@ public class ServiceReceiptImpl implements ServiceInterfaceReceipt{
 
 
     @Override
-    public void createReceipt(ReceiptDto receiptDto) {
+    public  List<Optional<String>> createReceipt(ReceiptDto receiptDto) {
     List<RequestDto> receiptDtoList = receiptDto.getListProducts();
     List<ProductsReceipt> listProductReceipt = serviceProductsReceipt.getListProducts(receiptDtoList);
     List<Optional<String>> optionalList = getInventory(listProductReceipt);
@@ -36,6 +36,7 @@ public class ServiceReceiptImpl implements ServiceInterfaceReceipt{
         repoReceipt.save(receipt);
     }
 
+    return optionalList;
     }
 
     @Override

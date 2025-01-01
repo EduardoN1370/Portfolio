@@ -10,7 +10,7 @@ import java.util.Optional;
 
 public interface ServiceInterfaceReceipt {
 
-    public void createReceipt(ReceiptDto receipt);
+    public List<Optional<String>> createReceipt(ReceiptDto receipt);
 
     public Receipt getReceipt(Long id);
 

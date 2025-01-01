@@ -43,8 +43,9 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.OK).body(product);
     }
     @GetMapping()
-    public ResponseEntity<Product> getProductByName(@RequestParam String name) {
-        Product product = productServiceRepository.getProductByName(name);
+    public ResponseEntity<Product> getProductByName(@RequestParam String nameProduct) {
+        System.out.println(nameProduct);
+        Product product = productServiceRepository.getProductByName(nameProduct);
         return ResponseEntity.status(HttpStatus.OK).body(product);
     }
 

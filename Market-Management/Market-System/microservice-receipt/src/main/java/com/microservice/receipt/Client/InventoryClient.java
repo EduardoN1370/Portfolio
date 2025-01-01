@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @FeignClient(name="mscv-inventory",url="localhost:7090/api/inventory")
 public interface InventoryClient {
-    @GetMapping
-    InventoryDto getInventory(@RequestParam String name);
+    @GetMapping()
+    InventoryDto getInventory(@RequestParam String nameProduct);
 }
