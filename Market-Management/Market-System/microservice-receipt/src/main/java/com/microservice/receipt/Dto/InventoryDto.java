@@ -3,8 +3,8 @@ package com.microservice.receipt.Dto;
 import lombok.Data;
 
 @Data
-public class ProductDto {
+public class InventoryDto {
     private int id;
     private String nameProduct;
-    private double price;
+    private int quantity;
 }

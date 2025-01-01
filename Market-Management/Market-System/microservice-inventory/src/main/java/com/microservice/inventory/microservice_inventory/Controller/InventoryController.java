@@ -24,6 +24,10 @@ public class InventoryController {
     public  void removeProduct(@RequestBody Inventory inventory){
         inventoryServiceRepository.removeProdct(inventory.getNameProduct(), inventory.getQuantity());
     }
+    @GetMapping()
+    public Inventory getInventory(@RequestParam String nameProduct) {
+        return inventoryServiceRepository.getInventory(nameProduct);
+    }
 
 
 }

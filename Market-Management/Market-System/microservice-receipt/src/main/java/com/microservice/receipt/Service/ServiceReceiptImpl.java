@@ -1,5 +1,6 @@
 package com.microservice.receipt.Service;
 
+import com.microservice.receipt.Dto.InventoryDto;
 import com.microservice.receipt.Dto.ProductDto;
 import com.microservice.receipt.Dto.ReceiptDto;
 import com.microservice.receipt.Dto.RequestDto;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ServiceReceiptImpl implements ServiceInterfaceReceipt{
@@ -20,20 +22,30 @@ public class ServiceReceiptImpl implements ServiceInterfaceReceipt{
     @Autowired
     private ServiceProductsReceipt serviceProductsReceipt;
 
+
+
     @Override
     public void createReceipt(ReceiptDto receiptDto) {
     List<RequestDto> receiptDtoList = receiptDto.getListProducts();
     List<ProductsReceipt> listProductReceipt = serviceProductsReceipt.getListProducts(receiptDtoList);
-    Receipt receipt = serviceProductsReceipt.buildReceipt(listProductReceipt);
-    repoReceipt.save(receipt);
-
+    List<Optional<String>> optionalList = getInventory(listProductReceipt);
+    System.out.println(" Abajo esta el product list");
+    System.out.println(optionalList);
+    if(optionalList.isEmpty()) {
+        Receipt receipt = serviceProductsReceipt.buildReceipt(listProductReceipt);
+        repoReceipt.save(receipt);
     }
 
-
-
+    }
 
     @Override
     public Receipt getReceipt(Long id) {
         return repoReceipt.findById(id).orElse(null);
+    }
+
+    @Override
+    public List<Optional<String>> getInventory(List<ProductsReceipt> listProductReceipt) {
+       List<Optional<String>> listOptional= serviceProductsReceipt.inventoryList(listProductReceipt);
+        return listOptional;
     }
 }

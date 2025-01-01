@@ -26,7 +26,6 @@ public class ReceiptController {
     public ResponseEntity<Receipt> getReceipt(@PathVariable("id") Long id) {
         Receipt receipt= serviceInterfaceReceipt.getReceipt(id);
 /*
-        receipt.getListProducts().stream().forEach(re -> re.setReceipt(id));
 */
         return ResponseEntity.status(HttpStatus.OK).body(receipt);
 

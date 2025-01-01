@@ -35,4 +35,9 @@ public class InventoryServiceImpl implements InventoryServiceRepository{
         }
 
     }
+
+    @Override
+    public Inventory getInventory(String nameProduct) {
+        return inventoryRepository.findByNameProduct(nameProduct);
+    }
 }

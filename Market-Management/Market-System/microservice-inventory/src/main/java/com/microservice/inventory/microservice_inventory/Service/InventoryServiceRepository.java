@@ -11,6 +11,7 @@ public interface InventoryServiceRepository {
 
     void removeProdct(String nameProduct,int quantity);
 
+    Inventory getInventory(String nameProduct);
 
 
 }
