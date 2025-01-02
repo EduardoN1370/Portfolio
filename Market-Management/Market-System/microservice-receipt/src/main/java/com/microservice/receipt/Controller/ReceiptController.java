@@ -8,8 +8,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Optional;
+
 @RestController
-@RequestMapping("api/receipt")
+@RequestMapping("/api/receipt")
 public class ReceiptController {
 
     @Autowired
@@ -17,9 +20,8 @@ public class ReceiptController {
 
     @PostMapping("/purchase")
     public ResponseEntity purchaseProducts(@RequestBody ReceiptDto receipt) {
-      serviceInterfaceReceipt.createReceipt(receipt);
-      return ResponseEntity.status(HttpStatus.CREATED).build();
-
+       serviceInterfaceReceipt.createReceipt(receipt);
+       return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @GetMapping("/{id}")

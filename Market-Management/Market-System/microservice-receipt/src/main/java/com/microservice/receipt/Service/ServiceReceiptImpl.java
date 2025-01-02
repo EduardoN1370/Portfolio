@@ -1,7 +1,5 @@
 package com.microservice.receipt.Service;
 
-import com.microservice.receipt.Dto.InventoryDto;
-import com.microservice.receipt.Dto.ProductDto;
 import com.microservice.receipt.Dto.ReceiptDto;
 import com.microservice.receipt.Dto.RequestDto;
 import com.microservice.receipt.Entity.ProductsReceipt;
@@ -25,18 +23,15 @@ public class ServiceReceiptImpl implements ServiceInterfaceReceipt{
 
 
     @Override
-    public  List<Optional<String>> createReceipt(ReceiptDto receiptDto) {
+    public  void createReceipt(ReceiptDto receiptDto) {
+
     List<RequestDto> receiptDtoList = receiptDto.getListProducts();
     List<ProductsReceipt> listProductReceipt = serviceProductsReceipt.getListProducts(receiptDtoList);
-    List<Optional<String>> optionalList = getInventory(listProductReceipt);
+    getInventory(listProductReceipt);
     System.out.println(" Abajo esta el product list");
-    System.out.println(optionalList);
-    if(optionalList.isEmpty()) {
-        Receipt receipt = serviceProductsReceipt.buildReceipt(listProductReceipt);
-        repoReceipt.save(receipt);
-    }
+    Receipt receipt = serviceProductsReceipt.buildReceipt(listProductReceipt);
+    repoReceipt.save(receipt);
 
-    return optionalList;
     }
 
     @Override
@@ -45,8 +40,8 @@ public class ServiceReceiptImpl implements ServiceInterfaceReceipt{
     }
 
     @Override
-    public List<Optional<String>> getInventory(List<ProductsReceipt> listProductReceipt) {
-       List<Optional<String>> listOptional= serviceProductsReceipt.inventoryList(listProductReceipt);
-        return listOptional;
+    public void getInventory(List<ProductsReceipt> listProductReceipt) {
+        serviceProductsReceipt.getInventory(listProductReceipt);
+
     }
 }

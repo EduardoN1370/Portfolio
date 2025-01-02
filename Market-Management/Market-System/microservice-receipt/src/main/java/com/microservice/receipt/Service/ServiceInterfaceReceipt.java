@@ -10,10 +10,10 @@ import java.util.Optional;
 
 public interface ServiceInterfaceReceipt {
 
-    public List<Optional<String>> createReceipt(ReceiptDto receipt);
+    public void createReceipt(ReceiptDto receipt);
 
     public Receipt getReceipt(Long id);
 
-    public List<Optional<String>> getInventory(List<ProductsReceipt> productsReceiptList);
+    public void getInventory(List<ProductsReceipt> productsReceiptList);
 
 }
