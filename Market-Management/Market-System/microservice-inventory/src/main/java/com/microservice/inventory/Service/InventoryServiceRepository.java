@@ -1,6 +1,6 @@
-package com.microservice.inventory.microservice_inventory.Service;
+package com.microservice.inventory.Service;
 
-import com.microservice.inventory.microservice_inventory.Entity.Inventory;
+import com.microservice.inventory.Entity.Inventory;
 
 public interface InventoryServiceRepository {
 

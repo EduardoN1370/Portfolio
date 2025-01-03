@@ -1,7 +1,7 @@
-package com.microservice.inventory.microservice_inventory.Service;
+package com.microservice.inventory.Service;
 
-import com.microservice.inventory.microservice_inventory.Entity.Inventory;
-import com.microservice.inventory.microservice_inventory.Repository.InventoryRepository;
+import com.microservice.inventory.Entity.Inventory;
+import com.microservice.inventory.Repository.InventoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,6 +1,6 @@
-package com.microservice.inventory.microservice_inventory.Repository;
+package com.microservice.inventory.Repository;
 
-import com.microservice.inventory.microservice_inventory.Entity.Inventory;
+import com.microservice.inventory.Entity.Inventory;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

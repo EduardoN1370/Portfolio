@@ -1,5 +1,10 @@
 spring:
   application:
     name: msvc-eureka
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/product_manage_system
+    username: root
+    password: 1513
   config:
     import: optional:configserver:http://localhost:8888

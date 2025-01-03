@@ -1,7 +1,7 @@
-package com.microservice.inventory.microservice_inventory.Controller;
+package com.microservice.inventory.Controller;
 
-import com.microservice.inventory.microservice_inventory.Entity.Inventory;
-import com.microservice.inventory.microservice_inventory.Service.InventoryServiceRepository;
+import com.microservice.inventory.Entity.Inventory;
+import com.microservice.inventory.Service.InventoryServiceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
