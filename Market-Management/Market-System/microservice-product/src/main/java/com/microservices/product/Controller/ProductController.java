@@ -21,6 +21,8 @@ public class ProductController {
 
     @PostMapping("/create")
     public ResponseEntity<Product> create (@RequestBody ProductDto productdto) {
+
+        System.out.println("Abajo esta el nombre");
         System.out.println(productdto.getNameProduct());
         InventoryDto inventoryDto = new InventoryDto(productdto.getNameProduct(),productdto.getQuantity());
         productServiceRepository.save(Product.builder()

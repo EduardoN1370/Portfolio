@@ -4,7 +4,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@FeignClient(name="mscv-inventory",url="localhost:9090/api/inventory")
+@FeignClient(name="mscv-inventory",url="localhost:8080/api/inventory")
 public interface ClientInventory {
 
         @PostMapping("/createProduct")
