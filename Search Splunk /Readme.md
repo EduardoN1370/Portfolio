@@ -20,7 +20,6 @@ This analysis aims to identify patterns, behaviors, and trends in attack activit
 - [ ] Did a single IP address generate different results when launching multiple attacks?
 - [ ] What were the responses to each type of attack?
 - [ ] What is the most common type of attack by country?
-- [ ] Which IP address generated the highest number of attacks?
 
 ## Solucion
 ### How many attacks were not blocked? 
@@ -39,6 +38,16 @@ source="cybersecurity_attacks.csv" sourcetype="csv"   |stats count by "Attack Ty
 <img width="610" height="358" alt="image" src="https://github.com/user-attachments/assets/5654d1ad-c59b-4333-a9c8-81a8cdc5cd0f" />
 
 ### Show the countries of origin for the attackers' IP addresses.
+
+List of some countries.
+```
+source="cybersecurity_attacks.csv"  sourcetype="csv"  | iplocation "Source IP Address"  | stats  values(Country) 
+```
+<img width="424" height="1201" alt="image" src="https://github.com/user-attachments/assets/b8fa39a1-2b1d-4a38-b26b-62f602993052" />
+
+
+Representation
+
 ```
 source="cybersecurity_attacks.csv"  sourcetype="csv"  | iplocation "Source IP Address"  | geostats count by Country
 ```
@@ -107,24 +116,45 @@ Here, you can see the number of unique IP addresses that launched attacks per da
 
 <img width="2542" height="532" alt="image" src="https://github.com/user-attachments/assets/2608c276-93e7-4616-95c9-b5d99f9affae" />
 
+### Did a single IP address generate different results when launching multiple attacks?
+
+There were no attacks from the same IP address that received different responses.
+
+```
+source="cybersecurity_attacks.csv"  sourcetype="csv" | stats values("Action Taken") as Response by "Source IP Address" | eval N_Response= mvcount(Response) | sort - N_response
+```
+
+<img width="2559" height="480" alt="image" src="https://github.com/user-attachments/assets/3187bab0-9c4f-4b0c-b782-1129e338c843" />
 
 
+In the following example, as can be seen, each IP address received the same response for every attempt it launched.
+
+```
+source="cybersecurity_attacks.csv"  sourcetype="csv" | stats list("Action Taken") as Response by "Source IP Address" | eval N_Response= mvcount(Response) | sort - N_response
+```
+
+<img width="2548" height="900" alt="image" src="https://github.com/user-attachments/assets/af82f3a1-98f1-45b3-90e2-0c4558dd0cd6" />
+
+### What were the responses to each type of attack?
+
+In this case, the inquiry concerns the type and quantity of responses received by each type of attack carried out.
+
+```
+source="cybersecurity_attacks.csv"   | rename "Action Taken" as Response | eval N_blocked= if (Response="Blocked", 1 , 0  ), N_Ignored= if (Response="Ignored", 1 , 0  ), N_Logged= if (Response="Logged", 1 , 0  ) |   stats sum(N_blocked) as T_blocked , sum(N_Ignored) as T_ignored, sum(N_Logged) as N_logged, count as Total by "Attack Type”
+```
+
+<img width="2554" height="400" alt="image" src="https://github.com/user-attachments/assets/4485cef0-fa08-43b4-8212-e9ca70796a24" />
 
 
+### What is the most common type of attack by country?
 
 
+```
+source="cybersecurity_attacks.csv" sourcetype="csv"  | iplocation "Source IP Address"  |top limit=1 "Attack Type" by Country
+```
 
 
-
-
-
-
-
-
-
-
-
-
+<img width="2530" height="734" alt="image" src="https://github.com/user-attachments/assets/c6f2a75d-f0ce-4796-a526-90d561086c4b" />
 
 
 
